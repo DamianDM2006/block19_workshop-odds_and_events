@@ -26,6 +26,13 @@ const getNumberForm = () => {
       <button name="srtOne">Sort 1</button>
       <button name="srtAll">Sort All</button>
   `;
+  $form.addEventListener(`submit`, (event) => {
+    event.preventDefault(`input`);
+    const $userNum = document.querySelector(`#addNum`);
+    const $userNumber = Number($userNum);
+    const toBank = bank.push(($userNumber));
+    
+  });
   return ($form);
 };
 const bankForm = getNumberForm();
@@ -34,20 +41,13 @@ console.log(bankForm);
 
 // === FUNCTION Add Number (toBank)===
 const addNumber = () => {
-  bankForm.addEventListener("submit", (event) => {
-    event.preventDefault()
-  const $userNum = document.querySelector(`input`)
+  
+  
 
-  const toBank = bank.push($userNum)
-
-
-
-
-  });
-console.log(`TEST`, $userNum);
- /*  return bank; */
+/* console.log(`userNum`, userNum); */
+/*  return bank; */
 };
-/* addNumber(); */
+addNumber();
 
 // === Display Inputted Numbers ===
 const displayNumbers = (fromWhere, toWhere) => {};
