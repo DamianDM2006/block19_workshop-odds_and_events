@@ -37,6 +37,8 @@ console.log(bankForm);
 // === FUNCTION Add Number (toBank)===
 const addNumber = () => {
   const addButton = bankForm.querySelector(`button[name="add"]`);
+  const sort1Button = bankForm.querySelector(`button[name="srtOne"]`);
+  const sortAllButton = bankForm.querySelector(`button[name="srtAll"]`);
   bankForm.addEventListener(`submit`, (event) => {
     if (event.submitter == addButton) {
       event.preventDefault();
@@ -44,6 +46,16 @@ const addNumber = () => {
       const $userNumber = $userNum.value;
       const toBank = bank.push(Number($userNumber));
       bankForm.reset();
+    } else if (event.submitter === sort1Button) {
+      event.preventDefault();
+      sortNumber();
+      bankForm.reset();
+    } else {
+      if (event.submitter === sortAllButton) {
+        event.preventDefault();
+        sortAll();
+        bankForm.reset();
+      }
     }
   });
 
@@ -55,10 +67,9 @@ const displayNumbers = (fromWhere, toWhere) => {};
 
 // === FUNCTION Sort First Number (number bank)
 const sortNumber = () => {
-console.log(bank);
+  console.log(bank);
   const firstNum = bank.shift();
   console.log(firstNum);
-
 };
 sortNumber();
 
