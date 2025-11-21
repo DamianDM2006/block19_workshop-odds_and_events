@@ -7,11 +7,10 @@
 // === STATE ===
 // --- [(number bank), (odd numbers), (even number)]
 const bank = [];
-console.log(`bank:`, bank);
+
 const oddNums = [];
-console.log(`oddNums:`, oddNums);
+
 const evenNums = [];
-console.log(`evenNums:`, evenNums);
 
 // === Provide Form to input numbers ===
 const getNumberForm = () => {
@@ -32,7 +31,6 @@ const getNumberForm = () => {
   return $form;
 };
 const bankForm = getNumberForm();
-console.log(bankForm);
 
 // === FUNCTION Add Number (toBank)===
 const addNumber = () => {
@@ -58,34 +56,36 @@ const addNumber = () => {
       }
     }
   });
-
   return bankForm;
 };
 
 // === Display Inputted Numbers [bank] ===
-const displayNumbers = (fromWhere, toWhere) => {};
+const displayNumbers = () => {
+
+};
 
 // === FUNCTION Sort First Number (number bank)
 const sortNumber = () => {
-  console.log(bank);
   const firstNum = bank.shift();
-  console.log(firstNum);
+  if (firstNum % 2 === 1 || firstNum % 2 === -1) {
+    const toOdd = oddNums.push(firstNum);
+  } else {
+    if (firstNum % 2 === 0) {
+      const toEven = evenNums.push(Number(firstNum));
+    }
+  }
+
+  render();
 };
-sortNumber();
 
 // === FUNCTION Sort All Numbers (number bank)
-const sortAll = (fromBank) => {
-  /* loop sortNumber() until bank is empty */
-  /* <button>Sort All</button>
-    <input
-      type="button"
-      id="sort-all"/> */
-};
-
-// === FUNCTION Odd or Even ===
-const oddEven = (fromBank) => {
-  /* if () */
-  /* else */
+const sortAll = () => {
+  bank.forEach((num) => {
+    sortNumber();
+  });
+console.log(`bank`, bank);
+console.log(`oddNums:`, oddNums);
+console.log(`evenNums:`, evenNums);
 };
 
 // === FUNCTION  Render "when STATE changes" ===
