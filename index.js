@@ -12,6 +12,33 @@ const oddNums = [];
 
 const evenNums = [];
 
+
+// === FUNCTION Sort First Number (number bank)
+const sortNumber = () => {
+  const firstNum = bank.shift();
+console.log(`firstNum`, firstNum);
+  if ((firstNum % 2 === 1) || (firstNum % 2 === -1)) {
+    const toOdd = oddNums.push(firstNum);
+console.log(`toOdd`, toOdd);
+  } else if ((firstNum % 2 === 0) && (firstNum !== 0)) {
+    const toEven = evenNums.push(Number(firstNum));
+console.log(`toEven`, toEven);
+  }
+
+  console.log(`bank Sort 1`, bank);
+  render();
+};
+
+// === FUNCTION Sort All Numbers (number bank)
+const sortAll = () => {
+  for (let i = 0; i < bank.length; ) {
+    sortNumber();
+  }
+  console.log(`bank ALL`, bank);
+  render();
+};
+
+
 // === Provide Form to input numbers ===
 const getNumberForm = () => {
   const $form = document.createElement("form");
@@ -32,6 +59,8 @@ const getNumberForm = () => {
 };
 const bankForm = getNumberForm();
 
+
+
 // === FUNCTION Add Number (toBank)===
 const addNumber = () => {
   const addButton = bankForm.querySelector(`button[name="add"]`);
@@ -40,7 +69,7 @@ const addNumber = () => {
   bankForm.addEventListener(`submit`, (event) => {
     const $userNum = bankForm.querySelector(`#addNum`);
     const $userNumber = $userNum.value;
-    if (event.submitter == addButton) {
+    if (event.submitter === addButton) {
       event.preventDefault();
       const toBank = bank.push(Number($userNumber));
       console.log(`bank ADD`, bank);
@@ -54,30 +83,12 @@ const addNumber = () => {
       sortAll();
       $userNum.value = ``;
     } else event.preventDefault();
+      $userNum.value = ``;
   });
   return bankForm;
 };
 
 
-// === FUNCTION Sort First Number (number bank)
-const sortNumber = () => {
-  const firstNum = bank.shift();
-  if (firstNum % 2 === 1 || firstNum % 2 === -1) {
-    const toOdd = oddNums.push(firstNum);
-  } else if (firstNum % 2 === 0 && firstNum !== 0) {
-    const toEven = evenNums.push(Number(firstNum));
-  }
-
-  console.log(`bank Sort 1`, bank);
-};
-
-// === FUNCTION Sort All Numbers (number bank)
-const sortAll = () => {
-  for (let i = 0; i < bank.length; ) {
-    sortNumber();
-  }
-  console.log(`bank ALL`, bank);
-};
 
 // === Display Inputted Numbers [bank] ===
 const displayNumbers = () => {
@@ -92,8 +103,6 @@ const displayNumbers = () => {
   `;
   return display;
 };
-
-
 
 
 // === FUNCTION  Render "when STATE changes" ===
