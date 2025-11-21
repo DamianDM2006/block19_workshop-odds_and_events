@@ -38,30 +38,38 @@ const addNumber = () => {
   const sort1Button = bankForm.querySelector(`button[name="srtOne"]`);
   const sortAllButton = bankForm.querySelector(`button[name="srtAll"]`);
   bankForm.addEventListener(`submit`, (event) => {
+    const $userNum = bankForm.querySelector(`#addNum`);
+    const $userNumber = $userNum.value;
     if (event.submitter == addButton) {
       event.preventDefault();
-      const $userNum = bankForm.querySelector(`#addNum`);
-      const $userNumber = $userNum.value;
       const toBank = bank.push(Number($userNumber));
-      bankForm.reset();
+      console.log(`bank ADD`, bank);
+      $userNum.value = ``;
     } else if (event.submitter === sort1Button) {
       event.preventDefault();
       sortNumber();
-      bankForm.reset();
-    } else {
-      if (event.submitter === sortAllButton) {
-        event.preventDefault();
-        sortAll();
-        bankForm.reset();
-      }
-    }
+      $userNum.value = ``;
+    } else if (event.submitter === sortAllButton) {
+      event.preventDefault();
+      sortAll();
+      $userNum.value = ``;
+    } else event.preventDefault();
   });
   return bankForm;
 };
 
 // === Display Inputted Numbers [bank] ===
 const displayNumbers = () => {
-
+  const display = document.createElement("section");
+  display.innerHTML = `
+    <h3>BANK</h3>
+      <p>${bank}</p>
+    <h3>ODD NUMBERS</h3>
+      <p>${oddNums}</p>
+    <h3>EVEN NUMBERS</h3>
+      <p>${evenNums}</p>
+  `;
+  return display;
 };
 
 // === FUNCTION Sort First Number (number bank)
@@ -69,23 +77,22 @@ const sortNumber = () => {
   const firstNum = bank.shift();
   if (firstNum % 2 === 1 || firstNum % 2 === -1) {
     const toOdd = oddNums.push(firstNum);
-  } else {
-    if (firstNum % 2 === 0) {
-      const toEven = evenNums.push(Number(firstNum));
-    }
+  } else if (firstNum % 2 === 0 && firstNum !== 0) {
+    const toEven = evenNums.push(Number(firstNum));
   }
 
-  render();
+  console.log(`bank Sort 1`, bank);
+  // render();
 };
 
 // === FUNCTION Sort All Numbers (number bank)
 const sortAll = () => {
-  bank.forEach((num) => {
+  for (let i = 0; i < bank.length; ) {
     sortNumber();
-  });
-console.log(`bank`, bank);
-console.log(`oddNums:`, oddNums);
-console.log(`evenNums:`, evenNums);
+  }
+  console.log(`bank ALL`, bank);
+  // render();
+  // return bank;
 };
 
 // === FUNCTION  Render "when STATE changes" ===
@@ -94,7 +101,9 @@ const render = () => {
   $app.innerHTML = `
     <h2>Odds & Evens</h2>
     <EnterNumber></EnterNumber>
+    <displayNums></displayNums>
   `;
   $app.querySelector("EnterNumber").replaceWith(addNumber());
+  $app.querySelector("displayNums").replaceWith(displayNumbers());
 };
 render();
