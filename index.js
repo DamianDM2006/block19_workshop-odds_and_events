@@ -58,6 +58,27 @@ const addNumber = () => {
   return bankForm;
 };
 
+
+// === FUNCTION Sort First Number (number bank)
+const sortNumber = () => {
+  const firstNum = bank.shift();
+  if (firstNum % 2 === 1 || firstNum % 2 === -1) {
+    const toOdd = oddNums.push(firstNum);
+  } else if (firstNum % 2 === 0 && firstNum !== 0) {
+    const toEven = evenNums.push(Number(firstNum));
+  }
+
+  console.log(`bank Sort 1`, bank);
+};
+
+// === FUNCTION Sort All Numbers (number bank)
+const sortAll = () => {
+  for (let i = 0; i < bank.length; ) {
+    sortNumber();
+  }
+  console.log(`bank ALL`, bank);
+};
+
 // === Display Inputted Numbers [bank] ===
 const displayNumbers = () => {
   const display = document.createElement("section");
@@ -72,28 +93,8 @@ const displayNumbers = () => {
   return display;
 };
 
-// === FUNCTION Sort First Number (number bank)
-const sortNumber = () => {
-  const firstNum = bank.shift();
-  if (firstNum % 2 === 1 || firstNum % 2 === -1) {
-    const toOdd = oddNums.push(firstNum);
-  } else if (firstNum % 2 === 0 && firstNum !== 0) {
-    const toEven = evenNums.push(Number(firstNum));
-  }
 
-  console.log(`bank Sort 1`, bank);
-  // render();
-};
 
-// === FUNCTION Sort All Numbers (number bank)
-const sortAll = () => {
-  for (let i = 0; i < bank.length; ) {
-    sortNumber();
-  }
-  console.log(`bank ALL`, bank);
-  // render();
-  // return bank;
-};
 
 // === FUNCTION  Render "when STATE changes" ===
 const render = () => {
