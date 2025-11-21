@@ -16,16 +16,12 @@ const evenNums = [];
 // === FUNCTION Sort First Number (number bank)
 const sortNumber = () => {
   const firstNum = bank.shift();
-console.log(`firstNum`, firstNum);
   if ((firstNum % 2 === 1) || (firstNum % 2 === -1)) {
     const toOdd = oddNums.push(firstNum);
-console.log(`toOdd`, toOdd);
   } else if ((firstNum % 2 === 0) && (firstNum !== 0)) {
     const toEven = evenNums.push(Number(firstNum));
-console.log(`toEven`, toEven);
   }
-
-  console.log(`bank Sort 1`, bank);
+console.log(`bank Sort 1`, bank);
   render();
 };
 
@@ -34,7 +30,7 @@ const sortAll = () => {
   for (let i = 0; i < bank.length; ) {
     sortNumber();
   }
-  console.log(`bank ALL`, bank);
+console.log(`bank ALL`, bank);
   render();
 };
 
@@ -72,7 +68,7 @@ const addNumber = () => {
     if (event.submitter === addButton) {
       event.preventDefault();
       const toBank = bank.push(Number($userNumber));
-      console.log(`bank ADD`, bank);
+console.log(`bank ADD`, bank);
       $userNum.value = ``;
     } else if (event.submitter === sort1Button) {
       event.preventDefault();
@@ -82,8 +78,7 @@ const addNumber = () => {
       event.preventDefault();
       sortAll();
       $userNum.value = ``;
-    } else event.preventDefault();
-      $userNum.value = ``;
+    } 
   });
   return bankForm;
 };
