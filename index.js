@@ -1,28 +1,18 @@
-// - Numbers are moved into the correct category based on whether they are odd or even.
-// - Functions are used to organize logic involving state changes.
-// - The application is rerendered whenever state changes.
-// - UI elements are organized into component functions.
-// - Event listeners modify state. They do not directly modify the document.
 
 // === STATE ===
-// --- [(number bank), (odd numbers), (even number)]
 const bank = [];
-
 const oddNums = [];
-
 const evenNums = [];
-
 
 // === FUNCTION Sort First Number (number bank)
 const sortNumber = () => {
   const firstNum = bank.shift();
-  if ((firstNum % 2 === 1) || (firstNum % 2 === -1)) {
+  if (firstNum % 2 === 1 || firstNum % 2 === -1) {
     const toOdd = oddNums.push(firstNum);
-  } else if ((firstNum % 2 === 0) && (firstNum !== 0)) {
+  } else if (firstNum % 2 === 0 && firstNum !== 0) {
     const toEven = evenNums.push(Number(firstNum));
   }
-console.log(`bank Sort 1`, bank);
-  render();
+  console.log(`bank Sort 1`, bank);
 };
 
 // === FUNCTION Sort All Numbers (number bank)
@@ -30,10 +20,8 @@ const sortAll = () => {
   for (let i = 0; i < bank.length; ) {
     sortNumber();
   }
-console.log(`bank ALL`, bank);
-  render();
+  console.log(`bank ALL`, bank);
 };
-
 
 // === Provide Form to input numbers ===
 const getNumberForm = () => {
@@ -50,39 +38,40 @@ const getNumberForm = () => {
       <button name="srtOne">Sort 1</button>
       <button name="srtAll">Sort All</button>
   `;
-
   return $form;
 };
+
 const bankForm = getNumberForm();
 
+const addButton = bankForm.querySelector(`button[name="add"]`);
+const sort1Button = bankForm.querySelector(`button[name="srtOne"]`);
+const sortAllButton = bankForm.querySelector(`button[name="srtAll"]`);
+
+bankForm.addEventListener(`submit`, (event) => {
+  const $userNum = bankForm.querySelector(`#addNum`);
+  const userNumber = Number($userNum.value);
+  if (event.submitter === addButton) {
+    event.preventDefault();
+    bank.push(Number(userNumber));
+    console.log(`bank ADD`, bank);
+  } else if (event.submitter === sort1Button) {
+    event.preventDefault();
+    sortNumber();
+  } else if (event.submitter === sortAllButton) {
+    event.preventDefault();
+    sortAll();
+  }
+  
+  render();
+  $userNum.value = ``;
+  bankForm.focus();
 
 
-// === FUNCTION Add Number (toBank)===
+});
+
 const addNumber = () => {
-  const addButton = bankForm.querySelector(`button[name="add"]`);
-  const sort1Button = bankForm.querySelector(`button[name="srtOne"]`);
-  const sortAllButton = bankForm.querySelector(`button[name="srtAll"]`);
-  bankForm.addEventListener(`submit`, (event) => {
-    const $userNum = bankForm.querySelector(`#addNum`);
-    const $userNumber = $userNum.value;
-    if (event.submitter === addButton) {
-      event.preventDefault();
-      const toBank = bank.push(Number($userNumber));
-console.log(`bank ADD`, bank);
-      $userNum.value = ``;
-    } else if (event.submitter === sort1Button) {
-      event.preventDefault();
-      sortNumber();
-      $userNum.value = ``;
-    } else if (event.submitter === sortAllButton) {
-      event.preventDefault();
-      sortAll();
-      $userNum.value = ``;
-    } 
-  });
   return bankForm;
 };
-
 
 
 // === Display Inputted Numbers [bank] ===
@@ -98,7 +87,6 @@ const displayNumbers = () => {
   `;
   return display;
 };
-
 
 // === FUNCTION  Render "when STATE changes" ===
 const render = () => {
